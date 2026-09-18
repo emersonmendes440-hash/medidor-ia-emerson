@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "Medidor IA TB",
+    "productName": "Medidor IA Emerson",
   "version": "1.13.1",
-  "identifier": "com.taniabulhoes.medidoria",
+  "identifier": "com.emersonmendes.medidoria",
   "build": {
     "frontendDist": "ui"
   },
