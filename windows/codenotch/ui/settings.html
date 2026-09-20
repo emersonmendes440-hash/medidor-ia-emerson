@@ -169,6 +169,7 @@
             <select id="lang" aria-label="Language">
               <option value="auto">Follow system</option>
               <option value="en">English</option>
+              <option value="pt">Português</option>
               <option value="zh">&#20013;&#25991;</option>
               <option value="ja">&#26085;&#26412;&#35486;</option>
               <option value="ko">&#54620;&#44397;&#50612;</option>
@@ -229,6 +230,44 @@ function esc(s){
    Strings shared with the Mac take the Mac catalog's translations; strings kept from the previous
    Windows page keep the Russian #141 gave them. `applyStaticUi()` matches a text node exactly, so
    rewording any string here means changing its key in every table. */
+const PT_STATIC = {
+  'Settings sections':'Seções das configurações', 'Close':'Fechar',
+  'Accounts':'Contas', 'Appearance':'Aparência', 'General':'Geral', 'Quit Codenotch':'Sair do Medidor IA',
+  'Connected':'Conectado', 'Not connected':'Não conectado',
+  'These have no ring to place. Switch one on and it joins the end of the list above.':'Estes não têm anel para mostrar. Ligue um e ele entra no fim da lista acima.',
+  'One provider always stays ticked, so the pill is never empty.':'Pelo menos um serviço fica sempre marcado, para a barra nunca ficar vazia.',
+  'At least one provider stays on the notch':'Pelo menos um serviço precisa ficar na barra',
+  'Notch reads':'O que a barra mostra', 'Model data':'Dados do modelo', 'Automatic':'Automático', '5-Hour Limit':'Limite de 5 horas', 'Weekly Limit':'Limite semanal',
+  'Gemini Models':'Modelos Gemini', 'Claude and GPT models':'Modelos Claude e GPT',
+  'Let Claude Code notify Codenotch':'Deixar o Claude Code avisar o Medidor IA',
+  'Turning this on adds a few lines to your Claude Code settings file so that Claude Code sends Codenotch a short message when a session starts, when it is working, when it is waiting for your answer, and when it finishes. That is what makes the ring spin and the amber ring pulse.':'Ao ligar isso, algumas linhas são acrescentadas ao arquivo de configuração do Claude Code para que ele avise o Medidor IA quando uma sessão começa, quando está trabalhando, quando está esperando a sua resposta e quando termina. É isso que faz o anel girar e o anel âmbar piscar.',
+  'Notch':'Barra', 'Show':'Mostrar', 'Always show':'Mostrar sempre', 'Hide':'Esconder',
+  'Size':'Tamanho', 'Small':'Pequeno', 'Medium':'Médio', 'Large':'Grande',
+  'Takes the least room on the edge. Readable, but not from across the desk.':'Ocupa o mínimo de espaço na borda. Dá para ler de perto, mas não do outro lado da mesa.',
+  'The size the notch was drawn at.':'O tamanho para o qual a barra foi desenhada.',
+  'Easier to read at a glance, and harder to ignore.':'Mais fácil de ler de relance e mais difícil de ignorar.',
+  'Weekly ring':'Anel semanal', 'Off':'Desligado', 'Inside':'Por dentro', 'Outside':'Por fora',
+  'One ring per provider, showing the headline limit. The weekly allowance stays in the hover card.':'Um anel por serviço, mostrando o limite principal. A cota semanal fica no cartão que aparece ao passar o mouse.',
+  'A thinner ring for the weekly limit, drawn inside the main one. It shares the gap with the working indicator.':'Um anel mais fino para o limite semanal, desenhado dentro do principal. Ele divide o espaço com o indicador de trabalho.',
+  'A thinner ring for the weekly limit, drawn around the main one, in the margin between the ring and the notch edge.':'Um anel mais fino para o limite semanal, desenhado em volta do principal, na margem entre o anel e a borda da barra.',
+  'The notch stays open with every reading visible.':'A barra fica aberta com todas as leituras à vista.',
+  'The black pill against the right-hand edge of the screen, with one ring per tool. Turn it off and the pill disappears; Codenotch keeps counting your usage either way.':'A barrinha preta encostada na borda direita da tela, com um anel por ferramenta. Se desligar, ela some; o Medidor IA continua contando o seu uso do mesmo jeito.',
+  'Recentre':'Centralizar',
+  'The pill can be dragged up and down the right-hand edge. If it has ended up somewhere you cannot see it — off the bottom of a screen you have unplugged, say — this drops it back into the middle of the edge.':'A barrinha pode ser arrastada para cima e para baixo na borda direita. Se ela parou em um lugar que você não enxerga — fora de um monitor que foi desligado, por exemplo — isto devolve ela para o meio da borda.',
+  'The notch is back in the middle':'A barra voltou para o meio',
+  'App':'Aplicativo', 'App icon':'Ícone do aplicativo', 'System tray':'Ao lado do relógio', 'Neither':'Nenhum dos dois',
+  'The small icon down by the clock. Right-clicking it opens this window, refreshes the readings, or quits Codenotch.':'O ícone pequeno lá embaixo, perto do relógio. Clicando com o botão direito você abre esta janela, atualiza as leituras ou fecha o Medidor IA.',
+  'No icon in the system tray. Open Codenotch again from the Start menu to bring these settings back.':'Sem ícone perto do relógio. Abra o Medidor IA de novo pelo menu Iniciar para voltar a estas configurações.',
+  'Held on: the notch is hidden, so this icon is the only way left to reach Codenotch. Switch the notch back on first if you want to hide it.':'Mantido ligado: a barra está escondida, então este ícone é o único jeito de chegar no Medidor IA. Ligue a barra de novo antes de esconder o ícone.',
+  'The taskbar icon has been kept on. With the notch hidden it is the only way left to open this window or to quit Codenotch, so Codenotch will not let both of them be switched off at the same time.':'O ícone da barra de tarefas foi mantido ligado. Com a barra escondida, ele é o único jeito de abrir esta janela ou fechar o Medidor IA, por isso os dois não podem ficar desligados ao mesmo tempo.',
+  'Language':'Idioma', 'Follow system':'Igual ao sistema', 'English':'English', 'Русский':'Русский',
+  'Sets the language used by Codenotch. “Follow system” uses the language Windows itself is set to.':'Define o idioma do Medidor IA. A opção “Igual ao sistema” usa o idioma em que o Windows está.',
+  'Open Codenotch at login':'Abrir o Medidor IA ao entrar no Windows',
+  'Codenotch opens by itself every time you sign in to this computer, and waits quietly in the background until a coding session starts. Turn it off and you have to open Codenotch yourself.':'O Medidor IA abre sozinho toda vez que você entra neste computador e fica quietinho em segundo plano até começar uma sessão de programação. Se desligar, você precisa abrir o Medidor IA na mão.',
+  'Version':'Versão', 'Data folder':'Pasta de dados', 'Open folder':'Abrir a pasta',
+  'Everything Codenotch remembers lives in one folder: your settings, its log file, and the "glyphs" folder where you can drop your own icons. Opens in File Explorer.':'Tudo o que o Medidor IA guarda fica em uma pasta só: as suas configurações, o arquivo de registro e a pasta "glyphs", onde você pode colocar os seus próprios ícones. Abre no Explorador de Arquivos.',
+  'App designed and developed by':'Aplicativo desenhado e desenvolvido por', 'Saved':'Salvo'
+};
 const RU_STATIC = {
   'Settings sections':'Разделы настроек', 'Close':'Закрыть',
   'Accounts':'Аккаунты', 'Appearance':'Внешний вид', 'General':'Общие', 'Quit Codenotch':'Выйти из Codenotch',
@@ -473,13 +512,14 @@ const KO_STATIC = {
   'No icon in the system tray. Open Codenotch again from the Start menu to bring these settings back.':'시스템 트레이에 아이콘이 없습니다. 이 설정을 다시 가져오려면 시작 메뉴에서 Codenotch를 다시 여세요.',
   'Model data':'모델 데이터'
 };
-const STATIC_TEXT = { ru: RU_STATIC, zh: ZH_STATIC, ja: JA_STATIC, ko: KO_STATIC };
+const STATIC_TEXT = { ru: RU_STATIC, zh: ZH_STATIC, ja: JA_STATIC, ko: KO_STATIC, pt: PT_STATIC };
 const STATUS_TEXT = {
   en:{ ok:'', stale:'last reading is old', needsAuth:'not signed in', absent:'not installed', none:'nothing to report', error:'not reachable' },
   ru:{ ok:'', stale:'данные устарели', needsAuth:'не выполнен вход', absent:'не установлен', none:'нет данных', error:'недоступен' },
   zh:{ ok:'', stale:'上次读数已过期', needsAuth:'未登录', absent:'未安装', none:'暂无报告', error:'无法连接' },
   ja:{ ok:'', stale:'最後の読み取りが古いです', needsAuth:'サインインしていません', absent:'インストールされていません', none:'報告するものがありません', error:'到達できません' },
-  ko:{ ok:'', stale:'마지막 읽기가 오래되었습니다', needsAuth:'로그인되지 않음', absent:'설치되지 않음', none:'보고할 내용 없음', error:'연결할 수 없음' }
+  ko:{ ok:'', stale:'마지막 읽기가 오래되었습니다', needsAuth:'로그인되지 않음', absent:'설치되지 않음', none:'보고할 내용 없음', error:'연결할 수 없음' },
+  pt:{ ok:'', stale:'a última leitura está velha', needsAuth:'não conectado', absent:'não instalado', none:'nada a informar', error:'não foi possível acessar' }
 };
 let uiLang = 'en';
 function ui(key, fallback){ const table = STATIC_TEXT[uiLang]; return (table && table[key]) || fallback; }
@@ -975,7 +1015,7 @@ document.getElementById('btn-recentre').addEventListener('click', () => {
 });
 
 /* ---- Appearance: language ------------------------------------------------ */
-const LANGS = ['auto', 'en', 'zh', 'ja', 'ko', 'ru', 'uk'];
+const LANGS = ['auto', 'en', 'pt', 'zh', 'ja', 'ko', 'ru', 'uk'];
 document.getElementById('lang').addEventListener('change', e => {
   const previous = e.target.dataset.previous || 'auto';
   const v = LANGS.indexOf(e.target.value) >= 0 ? e.target.value : 'auto';
