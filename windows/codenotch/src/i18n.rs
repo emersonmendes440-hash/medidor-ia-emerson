@@ -23,6 +23,9 @@ pub fn resolve_auto() -> &'static str {
             if name.starts_with("uk") {
                 return "uk";
             }
+            if name.starts_with("pt") {
+                return "pt";
+            }
         }
     }
     "en"
@@ -94,6 +97,7 @@ pub fn tr(lang: &str, key: &str) -> &'static str {
         ("ko", "open_data") => "데이터 폴더 열기 (로그 / 아이콘)",
         ("ru", "open_data") => "Открыть папку данных (журналы / значки)",
         ("uk", "open_data") => "Відкрити теку даних (журнали / значки)",
+        ("pt", "open_data") => "Abrir a pasta de dados (registros / ícones)",
         (_, "open_data") => "Open data folder (logs / icons)",
         ("ja", "refresh_all") => "すべて更新",
         ("ko", "refresh_all") => "모두 새로 고침",
@@ -129,6 +133,15 @@ pub fn tr(lang: &str, key: &str) -> &'static str {
         ("uk", "autostart") => "Запускати разом із Windows (у фоні)",
         ("ru", "refresh_all") => "Обновить всё",
         ("uk", "refresh_all") => "Оновити все",
+        ("pt", "install") => "Instalar os ganchos do Claude Code",
+        ("pt", "uninstall") => "Remover os ganchos",
+        ("pt", "language") => "Idioma",
+        ("pt", "lang_auto") => "Igual ao sistema",
+        ("pt", "reset_pos") => "Recolocar a barra no lugar",
+        ("pt", "quit") => "Sair",
+        ("pt", "hooks_missing") => "Ganchos não instalados: clique com o botão direito no ícone ao lado do relógio → Instalar os ganchos do Claude Code (no aplicativo de mesa o modo reserva já entra sozinho)",
+        ("pt", "autostart") => "Abrir junto com o Windows (em segundo plano)",
+        ("pt", "refresh_all") => "Atualizar tudo",
         (_, "install") => "Install Claude Code hooks",
         (_, "uninstall") => "Uninstall hooks",
         (_, "language") => "Language",
@@ -144,6 +157,7 @@ pub fn tr(lang: &str, key: &str) -> &'static str {
         ("ko", "waiting") => "첫 번째 읽기를 기다리는 중…",
         ("ru", "waiting") => "Ожидание первых данных…",
         ("uk", "waiting") => "Очікування першого показника…",
+        ("pt", "waiting") => "Aguardando a primeira leitura…",
         (_, "waiting") => "Waiting for the first reading…",
 
         ("zh", "quit_app") => "退出 Codenotch",
@@ -151,12 +165,14 @@ pub fn tr(lang: &str, key: &str) -> &'static str {
         ("ko", "quit_app") => "Codenotch 종료",
         ("ru", "quit_app") => "Выйти из Codenotch",
         ("uk", "quit_app") => "Вийти з Codenotch",
+        ("pt", "quit_app") => "Sair do Medidor IA",
         (_, "quit_app") => "Quit Codenotch",
         ("zh", "settings") => "设置…",
         ("ja", "settings") => "設定…",
         ("ko", "settings") => "설정…",
         ("ru", "settings") => "Настройки…",
         ("uk", "settings") => "Налаштування…",
+        ("pt", "settings") => "Configurações…",
         (_, "settings") => "Settings…",
 
 
@@ -226,6 +242,34 @@ mod tests {
             );
             assert_ne!(tr("uk", key), "?", "unknown Ukrainian key {key}");
         }
+    }
+
+    const PORTUGUESE_KEYS: &[(&str, &str)] = &[
+        ("open_data", "Abrir a pasta de dados (registros / ícones)"),
+        ("install", "Instalar os ganchos do Claude Code"),
+        ("uninstall", "Remover os ganchos"),
+        ("language", "Idioma"),
+        ("lang_auto", "Igual ao sistema"),
+        ("reset_pos", "Recolocar a barra no lugar"),
+        ("quit", "Sair"),
+        ("autostart", "Abrir junto com o Windows (em segundo plano)"),
+        ("refresh_all", "Atualizar tudo"),
+        ("waiting", "Aguardando a primeira leitura…"),
+        ("quit_app", "Sair do Medidor IA"),
+        ("settings", "Configurações…"),
+    ];
+
+    #[test]
+    fn portuguese_translates_every_known_key() {
+        for (key, value) in PORTUGUESE_KEYS {
+            assert_eq!(
+                tr("pt", key),
+                *value,
+                "missing Portuguese translation for {key}"
+            );
+            assert_ne!(tr("pt", key), "?", "unknown Portuguese key {key}");
+        }
+        assert_ne!(tr("pt", "hooks_missing"), "?");
     }
 
     #[test]

@@ -49,6 +49,7 @@ pub fn used_left(w: &LimitWindow, lang: &str) -> String {
         "zh" => format!("已用 {used}% · 剩余 {left}%"),
         "ja" => format!("{used}% 使用 · 残り {left}%"),
         "uk" => format!("Використано {used}% · Лишилось {left}%"),
+        "pt" => format!("{used}% usado · {left}% restante"),
         _ => format!("{used}% Used · {left}% left"),
     }
 }
@@ -62,6 +63,7 @@ pub fn reset_text(resets_at: u64, now: u64, lang: &str) -> String {
             "zh" => "正在重置…",
             "ja" => "リセット中…",
             "uk" => "Скидання…",
+            "pt" => "Zerando…",
             _ => "Resetting…",
         }
         .into();
@@ -75,6 +77,7 @@ pub fn reset_text(resets_at: u64, now: u64, lang: &str) -> String {
             "zh" => format!("{m} 分钟后重置"),
             "ja" => format!("{m} 分後にリセット"),
             "uk" => format!("Скидання через {m} хв"),
+            "pt" => format!("Zera em {m} min"),
             _ => format!("Resets in {m} min"),
         };
     }
@@ -85,6 +88,7 @@ pub fn reset_text(resets_at: u64, now: u64, lang: &str) -> String {
             "zh" => format!("{h} 小时 {m} 分钟后重置"),
             "ja" => format!("{h} 時間 {m} 分後にリセット"),
             "uk" => format!("Скидання через {h} год {m} хв"),
+            "pt" => format!("Zera em {h}h {m}min"),
             _ => format!("Resets in {h}h {m}m"),
         };
     }
@@ -95,6 +99,8 @@ pub fn reset_text(resets_at: u64, now: u64, lang: &str) -> String {
             "zh" => format!("{d} 天 {h} 小时后重置"),
             "ja" => format!("{d} 日 {h} 時間後にリセット"),
             "uk" => format!("Скидання через {d} дн {h} год"),
+            "pt" if d == 1 => format!("Zera em 1 dia {h}h"),
+            "pt" => format!("Zera em {d} dias {h}h"),
             _ if d == 1 => format!("Resets in {d} Day {h}h"),
             _ => format!("Resets in {d} Days {h}h"),
         };
@@ -105,6 +111,7 @@ pub fn reset_text(resets_at: u64, now: u64, lang: &str) -> String {
         "zh" => format!("{when} 重置"),
         "ja" => format!("{when} にリセット"),
         "uk" => format!("Скидання {when}"),
+        "pt" => format!("Zera {when}"),
         _ => format!("Resets {when}"),
     }
 }
@@ -118,6 +125,7 @@ pub fn ago(since: u64, now: u64, lang: &str) -> String {
             "zh" => format!("{minutes} 分钟"),
             "ja" => format!("{minutes} 分"),
             "uk" => format!("{minutes} хв"),
+            "pt" => format!("{minutes} min"),
             _ => format!("{minutes}m"),
         }
     } else {
@@ -127,6 +135,7 @@ pub fn ago(since: u64, now: u64, lang: &str) -> String {
             "zh" => format!("{h} 小时"),
             "ja" => format!("{h} 時間"),
             "uk" => format!("{h} год"),
+            "pt" => format!("{h} h"),
             _ => format!("{h}h"),
         }
     };
@@ -135,6 +144,7 @@ pub fn ago(since: u64, now: u64, lang: &str) -> String {
         "zh" => format!("{span}前"),
         "ja" => format!("{span}前"),
         "uk" => format!("{span} тому"),
+        "pt" => format!("há {span}"),
         _ => format!("{span} ago"),
     }
 }
@@ -179,6 +189,15 @@ pub fn label(name: &str, lang: &str) -> String {
         ("uk", "5-hour Limit" | "5-Hour Limit") => "Ліміт 5 годин",
         ("uk", "Included usage") => "Використання в тарифі",
         ("uk", "API usage") => "Використання API",
+        ("pt", "Current session") => "Sessão atual",
+        ("pt", "Weekly (all models)") => "Semanal (todos os modelos)",
+        ("pt", "Weekly (Opus)") => "Semanal (Opus)",
+        ("pt", "Weekly (model-scoped)") => "Semanal (por modelo)",
+        ("pt", "Weekly limit" | "Weekly Limit") => "Limite semanal",
+        ("pt", "Monthly limit" | "Monthly Limit") => "Limite mensal",
+        ("pt", "5-hour Limit" | "5-Hour Limit") => "Limite de 5 horas",
+        ("pt", "Included usage") => "Uso incluído no plano",
+        ("pt", "API usage") => "Uso da API",
         // Only these three in Korean: the Mac catalog has no Korean, so the names it shares
         // with the card have nothing to take.
         ("ko", "Weekly (all models)") => "주간 (모든 모델)",
